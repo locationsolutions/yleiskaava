@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:gml="http://www.opengis.net/gml"
+            xmlns:yk="http://cgi.fi/locationsolutions/yleiskaava"
+            targetNamespace="http://cgi.fi/locationsolutions/yleiskaava"
+            elementFormDefault="qualified">
+
+    <xsd:import namespace="http://www.opengis.net/gml"
+                schemaLocation="http://schemas.opengis.net/gml/3.1.1/base/gml.xsd"/>
+
+    <xsd:complexType name="planType">
+        <xsd:complexContent>
+            <xsd:extension base="gml:AbstractFeatureType">
+                <xsd:sequence>
+                    <xsd:element name="planId" type="xsd:string"/>
+                    <xsd:element name="geom" type="gml:MultiSurfacePropertyType"/>
+                    <xsd:element name="approved" type="xsd:dateTime" minOccurs="0"/>
+                    <xsd:element name="nameFi" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="nameSv" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="regulationFi" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="regulationSv" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="complete" type="xsd:boolean"/>
+                    <xsd:element name="sykeId" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="regulationPdf" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="keepInEffect">
+                        <xsd:simpleType>
+                            <xsd:list itemType="xsd:string"/>
+                        </xsd:simpleType>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:element name="plan" substitutionGroup="gml:_Feature" type="yk:planType"/>
+
+    <xsd:complexType name="collectionType">
+        <xsd:complexContent>
+            <xsd:extension base="gml:FeatureCollectionType"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:element name="collection" substitutionGroup="gml:_FeatureCollection" type="yk:collectionType"/>
+</xsd:schema>
